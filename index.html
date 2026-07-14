@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OurCraft</title>
+    <style>
+        body {
+            background-color: #121214;
+            color: #e1e1e6;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+            overflow-x: hidden;
+        }
+        .container {
+            max-width: 600px;
+            width: 100%;
+        }
+        .gif-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+        }
+        .arrows-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        .arrow {
+            color: #ff3333;
+            font-size: 2.2rem;
+            font-weight: bold;
+            display: inline-block;
+            animation: bounce 1.6s infinite ease-in-out;
+        }
+        .arrow:nth-child(1) { animation-delay: 0s; }
+        .arrow:nth-child(2) { animation-delay: 0.15s; }
+        .arrow:nth-child(3) { animation-delay: 0.3s; }
+        .arrow:nth-child(4) { animation-delay: 0.45s; }
+        .arrow:nth-child(5) { animation-delay: 0.6s; }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(12px); }
+        }
+        .server-ip {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin: 15px 0;
+            letter-spacing: 1px;
+            background: linear-gradient(90deg, #ff3333, #ff7575);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 4px 15px rgba(255, 51, 51, 0.25);
+        }
+        .main-title {
+            font-size: 1.4rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            margin-top: 5px;
+            color: #ffffff;
+        }
+        .sub-text {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.3);
+            margin-top: 35px;
+            font-style: italic;
+        }
+        .signature {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.35);
+            margin-top: 8px;
+            font-weight: 500;
+        }
+        .social-links {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        .social-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.85rem;
+            opacity: 0.35;
+            transition: all 0.2s ease-in-out;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+        .social-links a:hover {
+            opacity: 0.85;
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- GIF Principal -->
+        <div class="gif-container">
+            <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExbDc2azB3ZmdkMjk0MXM5cmdwcmdjeHBneXMzbjA0bjVvdjF2anBobiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/93mS3A87wfmOySC29W/giphy.gif" alt="Minecraft Server Status">
+        </div>
+
+        <!-- Setas Vermelhas Animadas -->
+        <div class="arrows-container">
+            <span class="arrow">⬇</span>
+            <span class="arrow">⬇</span>
+            <span class="arrow">⬇</span>
+            <span class="arrow">⬇</span>
+            <span class="arrow">⬇</span>
+        </div>
+
+        <!-- Link -->
+        <div class="server-ip">mc.ourcraft.com.br</div>
+
+        <!-- Título -->
+        <div class="main-title">ACESSA MEU SERVIDOR DE MINECRAFT</div>
+
+        <!-- Assinatura -->
+        <div class="sub-text">(por favor, acessa lá)</div>
+        <div class="signature">by @olucascomk</div>
+
+        <!-- Minhas 'redes' -->
+        <div class="social-links">
+            <a href="https://github.com/lukasgcc" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="https://www.linkedin.com/in/lucasgccruz/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </div>
+    </div>
+</body>
+</html>
