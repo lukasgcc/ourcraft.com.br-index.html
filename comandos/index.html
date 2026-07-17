@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/images/favicon.png">
+    <title>OurCraft - Guia Geral de Comandos</title>
+    <style>
+        :root {
+            --bg-principal: #0a0b0d;
+            --bg-card: #13151c;
+            --texto: #f5f6fa;
+            --texto-secundario: #a4b0be;
+            --borda: #232733;
+            --borda-glow: #3d445c;
+            --default-color: #2ecc71;
+            --vip-color: #f1c40f;
+            --adm-color: #e74c3c;
+            --gradient-header: linear-gradient(135deg, #1f2438 0%, #0d1117 100%);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-principal);
+            color: var(--texto);
+            margin: 0;
+            padding: 0;
+            background-image: radial-gradient(circle at 50% 10%, #1a1f33 0%, var(--bg-principal) 70%);
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px 80px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: var(--gradient-header);
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid var(--borda);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            margin: 0 0 10px 0;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(241, 196, 15, 0.3);
+            letter-spacing: 1px;
+        }
+
+        header p {
+            color: var(--texto-secundario);
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        .search-container {
+            margin-bottom: 25px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 18px 25px;
+            font-size: 1.2rem;
+            background-color: var(--bg-card);
+            border: 2px solid var(--borda);
+            border-radius: 12px;
+            color: #fff;
+            box-sizing: border-box;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-bar:focus {
+            border-color: var(--vip-color);
+            box-shadow: 0 0 15px rgba(241, 196, 15, 0.2);
+            background-color: #181b24;
+        }
+
+        .filter-container {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 35px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            background-color: var(--bg-card);
+            border: 1px solid var(--borda);
+            color: var(--texto-secundario);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--borda-glow);
+            color: #fff;
+            background-color: #191c26;
+            transform: translateY(-2px);
+        }
+
+        .filter-btn.active[data-filter="all"] {
+            background-color: #2f3542;
+            border-color: #57606f;
+            color: #fff;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+
+        .filter-btn.active[data-filter="default"] {
+            background-color: rgba(46, 204, 113, 0.2);
+            border-color: var(--default-color);
+            color: var(--default-color);
+            box-shadow: 0 0 10px rgba(46, 204, 113, 0.2);
+        }
+
+        .filter-btn.active[data-filter="vip"] {
+            background-color: rgba(241, 196, 15, 0.2);
+            border-color: var(--vip-color);
+            color: var(--vip-color);
+            box-shadow: 0 0 10px rgba(241, 196, 15, 0.2);
+        }
+
+        .filter-btn.active[data-filter="adm"] {
+            background-color: rgba(231, 76, 60, 0.2);
+            border-color: var(--adm-color);
+            color: var(--adm-color);
+            box-shadow: 0 0 10px rgba(231, 76, 60, 0.2);
+        }
+
+        .plugin-section {
+            background-color: var(--bg-card);
+            border: 1px solid var(--borda);
+            border-radius: 14px;
+            padding: 30px;
+            margin-bottom: 35px;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .plugin-section:hover {
+            border-color: var(--borda-glow);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .plugin-title {
+            font-size: 1.7rem;
+            margin-top: 0;
+            margin-bottom: 25px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--borda);
+            color: #fff;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 15px 18px;
+            text-align: left;
+            border-bottom: 1px solid var(--borda);
+        }
+
+        th {
+            color: var(--texto-secundario);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            background-color: rgba(0, 0, 0, 0.15);
+            border-radius: 4px;
+        }
+
+        .command-name {
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: 700;
+            color: #fff;
+            font-size: 1.1rem;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 4px 8px;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: inline-block;
+        }
+
+        tr.command-row {
+            transition: background-color 0.2s ease;
+        }
+
+        tr.command-row:hover {
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-align: center;
+            min-width: 80px;
+        }
+
+        .badge-default { background-color: rgba(46, 204, 113, 0.12); color: var(--default-color); border: 1px solid rgba(46, 204, 113, 0.3); }
+        .badge-vip { background-color: rgba(241, 196, 15, 0.12); color: var(--vip-color); border: 1px solid rgba(241, 196, 15, 0.3); }
+        .badge-adm { background-color: rgba(231, 76, 60, 0.12); color: var(--adm-color); border: 1px solid rgba(231, 76, 60, 0.3); }
+
+        .no-results {
+            text-align: center;
+            color: var(--texto-secundario);
+            font-size: 1.3rem;
+            display: none;
+            margin-top: 50px;
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid var(--borda);
+        }
+
+        footer {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(19, 21, 28, 0.85);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--borda);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            color: var(--texto-secundario);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        footer span {
+            color: var(--vip-color);
+            font-weight: 700;
+        }
+
+        @media (max-width: 768px) {
+            th, td { padding: 12px; font-size: 0.95rem; }
+            .command-name { font-size: 1rem; }
+            header h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>OurCraft RPG âš”ï¸</h1>
+        <p>Central de Ajuda - Guia Absoluto de Comandos de Todos os Plugins</p>
+    </header>
+
+    <div class="search-container">
+        <input type="text" id="searchInput" class="search-bar" placeholder="Pesquise por plugin, comando ou palavra-chave (ex: teleporte, habilidade, claim, ban)...">
+    </div>
+
+    <div class="filter-container">
+        <button class="filter-btn active" data-filter="all">Todos os Cargos</button>
+        <button class="filter-btn" data-filter="default">ðŸŸ¢ Jogador</button>
+        <button class="filter-btn" data-filter="vip">ðŸŸ¡ VIP</button>
+        <button class="filter-btn" data-filter="adm">ðŸ”´ STAFF</button>
+    </div>
+
+    <div class="plugin-section" data-plugin="auraskills">
+        <div class="plugin-title">âœ¨ AuraSkills (Habilidades e Status)</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Comando</th>
+                    <th>DescriÃ§Ã£o</th>
+                    <th>PermissÃ£o de Uso</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="command-row" data-role="default" data-search="skills status nives habilidades menu">
+                    <td class="command-name">/skills</td>
+                    <td>Abre o menu principal de habilidades, status e progressÃ£o do RPG.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="default" data-search="skills top rank melhores habilidades">
+                    <td class="command-name">/skills top</td>
+                    <td>Mostra o ranking dos jogadores com maiores nÃ­veis de habilidades do servidor.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="default" data-search="skills rank posicao meu nivel">
+                    <td class="command-name">/skills rank</td>
+                    <td>Exibe a sua posiÃ§Ã£o exata no ranking de cada habilidade.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="default" data-search="skills toggle ativer desativar barra avisos">
+                    <td class="command-name">/skills toggle [actionbar/scoreboard]</td>
+                    <td>Ativa ou desativa a exibiÃ§Ã£o visual das barras de status na sua tela.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="skills modifier adicionar remover buff admin">
+                    <td class="command-name">/skills modifier [add/remove/list]</td>
+                    <td>Gerencia modificadores e buffs temporÃ¡rios ou permanentes de status.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="skills xp dar setar resetar admin">
+                    <td class="command-name">/skills xp [add/set/remove]</td>
+                    <td>Modifica diretamente os pontos de experiÃªncia de habilidade de um jogador.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="plugin-section" data-plugin="authme">
+        <div class="plugin-title">ðŸ”’ AuthMe (AutenticaÃ§Ã£o)</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Comando</th>
+                    <th>DescriÃ§Ã£o</th>
+                    <th>PermissÃ£o de Uso</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="command-row" data-role="default" data-search="register registrar senha conta seguranca">
+                    <td class="command-name">/register [Senha] [ConfirmarSenha]</td>
+                    <td>Registra uma nova senha de seguranÃ§a para a sua conta no primeiro login.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="default" data-search="login entrar conta senha logar">
+                    <td class="command-name">/login [Senha]</td>
+                    <td>Efetua o login na sua conta para liberar a movimentaÃ§Ã£o no servidor.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="default" data-search="changepassword mudar alterar trocar senha">
+                    <td class="command-name">/changepassword [SenhaAntiga] [NovaSenha]</td>
+                    <td>Altera a senha de autenticaÃ§Ã£o atual da sua conta.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="default" data-search="logout deslogar sair seguranca">
+                    <td class="command-name">/logout</td>
+                    <td>Desconecta a sua sessÃ£o atual, exigindo senha novamente para jogar.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="authme admin contas desregistrar relogar">
+                    <td class="command-name">/authme [register/unregister/reload]</td>
+                    <td>Comandos administrativos para gerenciar as contas registradas no servidor.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="plugin-section" data-plugin="blocklocker">
+        <div class="plugin-title">ðŸ§³ BlockLocker (Trancar BaÃºs e Portas)</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Comando</th>
+                    <th>DescriÃ§Ã£o</th>
+                    <th>PermissÃ£o de Uso</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="command-row" data-role="default" data-search="private trancar placa bau porta proteger">
+                    <td class="command-name">Placa [Private]</td>
+                    <td>Texto para escrever na primeira linha de uma placa para trancar baÃºs, portas ou fornalhas.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="default" data-search="blocklocker adicionar amigo placa trancado">
+                    <td class="command-name">/blocklocker [Linha] [NomeDoAmigo]</td>
+                    <td>Adiciona o nome de um amigo na placa do bloco trancado para dar acesso a ele.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="blocklocker reload admin trancas">
+                    <td class="command-name">/blocklocker reload</td>
+                    <td>Recarrega o sistema de arquivos e travas do BlockLocker.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="plugin-section" data-plugin="chestshop">
+        <div class="plugin-title">ðŸª™ ChestShop (Lojas por BaÃºs)</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Comando</th>
+                    <th>DescriÃ§Ã£o</th>
+                    <th>PermissÃ£o de Uso</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="command-row" data-role="default" data-search="chestshop loja placa bau vender comprar comercio">
+                    <td class="command-name">CriaÃ§Ã£o de Placa</td>
+                    <td>Estrutura de placa de comÃ©rcio: Linha 1: Nome | Linha 2: Qtd | Linha 3: B PreÃ§o/S PreÃ§o | Linha 4: Item.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-search="iteminfo id item placa loja codigo" data-role="default">
+                    <td class="command-name">/iteminfo</td>
+                    <td>Exibe o ID numÃ©rico ou nome exato do item na sua mÃ£o para usar nas placas da loja.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="chestshop reload admin economia loja">
+                    <td class="command-name">/chestshop reload</td>
+                    <td>Recarrega o sistema de proteÃ§Ã£o e configuraÃ§Ãµes das lojas por baÃº.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="plugin-section" data-plugin="chunky">
+        <div class="plugin-title">ðŸ—ºï¸ Chunky (PrÃ©-gerador de Mapa)</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Comando</th>
+                    <th>DescriÃ§Ã£o</th>
+                    <th>PermissÃ£o de Uso</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="command-row" data-role="adm" data-search="chunky start carregar mapa chunks gerador admin">
+                    <td class="command-name">/chunky start</td>
+                    <td>Inicia o processo de prÃ©-geraÃ§Ã£o do mapa para eliminar lag de exploraÃ§Ã£o.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="chunky pause pausar parar gerador admin">
+                    <td class="command-name">/chunky pause</td>
+                    <td>Pausa temporariamente a geraÃ§Ã£o de chunks em andamento.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="chunky cancel cancelar limpar progresso admin">
+                    <td class="command-name">/chunky cancel</td>
+                    <td>Cancela definitivamente a tarefa de carregamento de mapa atual.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="chunky center definir raio coordenada admin">
+                    <td class="command-name">/chunky center [x] [z]</td>
+                    <td>Define o ponto central que o Chunky usarÃ¡ de base para gerar o mundo.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="plugin-section" data-plugin="clearlag">
+        <div class="plugin-title">ðŸ§¹ ClearLag (Limpeza de ChÃ£o e Performance)</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Comando</th>
+                    <th>DescriÃ§Ã£o</th>
+                    <th>PermissÃ£o de Uso</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="command-row" data-role="default" data-search="lagg check desempenho tps itens chao">
+                    <td class="command-name">/lagg check</td>
+                    <td>Verifica a quantidade de entidades carregadas e a saÃºde atual do servidor.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="default" data-search="lagg area raio remover itens limpar">
+                    <td class="command-name">/lagg area [raio]</td>
+                    <td>Conta ou limpa as entidades de chÃ£o caÃ­das em um raio especÃ­fico de blocos.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="lagg clear limpar chao chao lixo admin">
+                    <td class="command-name">/lagg clear</td>
+                    <td>ForÃ§a a remoÃ§Ã£o imediata de todos os itens jogados no chÃ£o do mundo.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="lagg killmobs limpar monstros animais lag admin">
+                    <td class="command-name">/lagg killmobs</td>
+                    <td>Remove todas as entidades vivas (monstros/mobs) do mapa para reduzir o lag.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="lagg reload recarregar tabelas tempos admin">
+                    <td class="command-name">/lagg reload</td>
+                    <td>Recarrega as configuraÃ§Ãµes e os tempos do limpador automÃ¡tico.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="plugin-section" data-plugin="deathchests">
+        <div class="plugin-title">ðŸ’€ DeathChests (BaÃº de Morte)</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Comando</th>
+                    <th>DescriÃ§Ã£o</th>
+                    <th>PermissÃ£o de Uso</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="command-row" data-role="default" data-search="deathchest list lista meus baus morte morrer">
+                    <td class="command-name">/deathchest list</td>
+                    <td>Exibe uma lista com a localizaÃ§Ã£o de todos os seus baÃºs de morte ativos.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="default" data-search="deathchest tp teleporte meu bau morte">
+                    <td class="command-name">/deathchest tp [id]</td>
+                    <td>Teleporta vocÃª diretamente atÃ© o seu baÃº de morte correspondente.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="deathchest reload recarregar baus tempo admin">
+                    <td class="command-name">/deathchest reload</td>
+                    <td>Recarrega o arquivo de configuraÃ§Ã£o e dados dos baÃºs de inventÃ¡rio pÃ³s-morte.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="plugin-section" data-plugin="decentholograms">
+        <div class="plugin-title">ðŸ”® DecentHolograms (Hologramas Flutuantes)</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Comando</th>
+                    <th>DescriÃ§Ã£o</th>
+                    <th>PermissÃ£o de Uso</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="command-row" data-role="default" data-search="dh h list lista hologramas textos flutuantes">
+                    <td class="command-name">/dh h list</td>
+                    <td>Mostra a listagem com os nomes de todos os hologramas criados no servidor.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="dh h create criar holograma texto adm">
+                    <td class="command-name">/dh h create [Nome] [Texto]</td>
+                    <td>Cria um novo holograma flutuante na sua localizaÃ§Ã£o atual.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="dh h delete apagar remover holograma adm">
+                    <td class="command-name">/dh h delete [Nome]</td>
+                    <td>Apaga definitivamente um holograma flutuante do mapa.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="dh h addline adicionar linha texto adm">
+                    <td class="command-name">/dh h addline [Nome] [Texto]</td>
+                    <td>Insere uma nova linha de texto na parte inferior de um holograma existente.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="dh reload recarregar hologramas adm">
+                    <td class="command-name">/dh reload</td>
+                    <td>Recarrega todos os hologramas salvos e suas respectivas linhas e fontes.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="plugin-section" data-plugin="elitemobs">
+        <div class="plugin-title">ðŸ‘¹ EliteMobs (Monstros Elites e Bosses de RPG)</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Comando</th>
+                    <th>DescriÃ§Ã£o</th>
+                    <th>PermissÃ£o de Uso</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="command-row" data-role="default" data-search="em shop loja moedas elites comprar itens">
+                    <td class="command-name">/em shop</td>
+                    <td>Abre a loja de moedas procedentes de elites para comprar e vender equipamentos de RPG.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="default" data-search="em dungeons masmorras mundos chefes teleportar">
+                    <td class="command-name">/em dungeons</td>
+                    <td>Abre o menu de mundos de instÃ¢ncias e dungeons de chefÃµes do servidor.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="em custom itens invocar monstros chefes adm">
+                    <td class="command-name">/em custom [spawn/give]</td>
+                    <td>Invoca monstros customizados ou entrega itens lendÃ¡rios do EliteMobs diretamente.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="em setup configurar mundos dungeons adm">
+                    <td class="command-name">/em setup</td>
+                    <td>Abre o menu estrutural de instalaÃ§Ã£o de novas dungeons e mapas de boss.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="em reload recarregar monstros status adm">
+                    <td class="command-name">/em reload</td>
+                    <td>Recarrega todas as configuraÃ§Ãµes de nÃ­vel, loot e dano do EliteMobs.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="plugin-section" data-plugin="essentials">
+        <div class="plugin-title">âš™ï¸ EssentialsX (Comandos Globais e Utilidades)</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Comando</th>
+                    <th>DescriÃ§Ã£o</th>
+                    <th>PermissÃ£o de Uso</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="command-row" data-role="default" data-search="tpa teleporte ir ate amigo pedido">
+                    <td class="command-name">/tpa [Player]</td>
+                    <td>Envia uma solicitaÃ§Ã£o para se teleportar atÃ© o jogador indicado.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="default" data-search="tpaccept aceitar teleporte pedido amigo">
+                    <td class="command-name">/tpaccept</td>
+                    <td>Aceita o pedido de teletransporte de um jogador recebido recentemente.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="default" data-search="tpdeny recusar negar teleporte pedido">
+                    <td class="command-name">/tpdeny</td>
+                    <td>Recusa sumariamente a solicitaÃ§Ã£o de teletransporte recebida.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="default" data-search="sethome marcar casa base lar salvar">
+                    <td class="command-name">/sethome [Nome]</td>
+                    <td>Salva a sua posiÃ§Ã£o atual como um ponto de retorno. VIPs possuem direito a 5.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="default" data-search="home ir para casa base lar voltar">
+                    <td class="command-name">/home [Nome]</td>
+                    <td>Teleporta vocÃª de volta para uma de suas casas previamente salvas.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="default" data-search="delhome apagar deletar casa base lar">
+                    <td class="command-name">/delhome [Nome]</td>
+                    <td>Exclui permanentemente um ponto de sethome cadastrado.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="default" data-search="spawn voltar para o inicio cidade principal">
+                    <td class="command-name">/spawn</td>
+                    <td>Teleporta o seu personagem instantaneamente para a cidade/ponto inicial do mundo.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="default" data-search="msg sussurrar privado falar amigo cochichar">
+                    <td class="command-name">/msg [Player] [Texto]</td>
+                    <td>Envia uma mensagem privada de texto para outro jogador online.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="default" data-search="r responder privado sussurro ultimo">
+                    <td class="command-name">/r [Texto]</td>
+                    <td>Responde de forma rÃ¡pida ao Ãºltimo sussurro privado que vocÃª recebeu.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="default" data-search="pay pagar enviar dinheiro moedas economia">
+                    <td class="command-name">/pay [Player] [Quantia]</td>
+                    <td>Transfere moedas da sua carteira para a conta corrente de outro jogador.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="default" data-search="bal carteira saldo dinheiro moedas banco">
+                    <td class="command-name">/bal</td>
+                    <td>Exibe o saldo bancÃ¡rio e carteira atual do seu personagem.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="default" data-search="baltop ranking ricos dinheiro moedas economia">
+                    <td class="command-name">/baltop</td>
+                    <td>Lista os jogadores com as maiores fortunas acumuladas no servidor.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="default" data-search="warp ir local marcos teleportar placas">
+                    <td class="command-name">/warp [Nome]</td>
+                    <td>Teleporta seu personagem para marcos globais prÃ©-definidos (cidades, arenas, vilas).</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="default" data-search="setwarp criar marco global placa teleporte">
+                    <td class="command-name">/setwarp [Nome]</td>
+                    <td>Cadastra um novo teletransporte pÃºblico global no mapa.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="default" data-search="kit resgatar itens iniciais ferramentas ferramentas">
+                    <td class="command-name">/kit [Nome]</td>
+                    <td>Resgata conjuntos de ferramentas e itens liberados para o seu grupo de cargo.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="fly voar modo voo sobrevivencia adm">
+                    <td class="command-name">/fly</td>
+                    <td>Ativa ou desativa o modo de voo livre para o seu personagem.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="tp teletransporte forcado puxar adm">
+                    <td class="command-name">/tp [PlayerA] (PlayerB)</td>
+                    <td>Teleporta forÃ§adamente vocÃª atÃ© um jogador ou move um jogador atÃ© o outro.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="gamemode modo criativo aventura sobrevivencia adm">
+                    <td class="command-name">/gamemode [creative/survival/spectator]</td>
+                    <td>Altera o modo de jogo atual do seu personagem.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="heal curar vida coracoes adm">
+                    <td class="command-name">/heal (Player)</td>
+                    <td>Restaura completamente os coraÃ§Ãµes de vida e zera efeitos negativos de um jogador.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="feed alimentar fome barra adm">
+                    <td class="command-name">/feed (Player)</td>
+                    <td>Preenche totalmente a barra de fome e saturaÃ§Ã£o de um jogador.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="invsee ver inventario bau jogador espiar adm">
+                    <td class="command-name">/invsee [Player]</td>
+                    <td>Abre e inspeciona o inventÃ¡rio em tempo real de qualquer jogador online.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="ban banir expulsar eterno bloquear conta adm">
+                    <td class="command-name">/ban [Player] [Motivo]</td>
+                    <td>Baniræ°¸ä¹…mente a conta de um jogador infrator do servidor.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="kick expulsar tirar jogo adm">
+                    <td class="command-name">/kick [Player] [Motivo]</td>
+                    <td>Expulsa um jogador da sessÃ£o de jogo atual desconectando-o.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="mute calar mutar chat silenciar adm">
+                    <td class="command-name">/mute [Player] [Tempo]</td>
+                    <td>Silencia temporariamente ou permanentemente um jogador no chat global.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="plugin-section" data-plugin="fastasyncworldedit">
+        <div class="plugin-title">ðŸ› ï¸ FastAsyncWorldEdit (Editor de Blocos em Massa)</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Comando</th>
+                    <th>DescriÃ§Ã£o</th>
+                    <th>PermissÃ£o de Uso</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="command-row" data-role="adm" data-search="wand machado madeira selecao posicoes adm">
+                    <td class="command-name">//wand</td>
+                    <td>Entrega o machado de madeira marcador para realizar seleÃ§Ãµes de regiÃµes cÃºbicas.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="set preencher blocos mudar trocar adm">
+                    <td class="command-name">//set [Bloco]</td>
+                    <td>Preenche toda a seleÃ§Ã£o delimitada com o tipo de bloco especificado.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="copy copiar blocos construcoes adm">
+                    <td class="command-name">//copy</td>
+                    <td>Copia a estrutura contida na seleÃ§Ã£o atual para a Ã¡rea de transferÃªncia do jogo.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="paste colar blocos construcoes transferir adm">
+                    <td class="command-name">//paste</td>
+                    <td>Cola a estrutura da Ã¡rea de transferÃªncia baseada na posiÃ§Ã£o em que foi copiada.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="undo desfaz erro comando anterior adm">
+                    <td class="command-name">//undo</td>
+                    <td>Desfaz a Ãºltima alteraÃ§Ã£o massiva de blocos efetuada pelo WorldEdit.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="redo refazer comando proximo adm">
+                    <td class="command-name">//redo</td>
+                    <td>Refaz a Ãºltima aÃ§Ã£o de blocos desfeita pelo comando de undo.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="plugin-section" data-plugin="fastlogin">
+        <div class="plugin-title">ðŸ”‘ FastLogin (ConexÃ£o AutomÃ¡tica)</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Comando</th>
+                    <th>DescriÃ§Ã£o</th>
+                    <th>PermissÃ£o de Uso</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="command-row" data-role="default" data-search="premium original seguranca login automatico">
+                    <td class="command-name">/premium</td>
+                    <td>Vincula sua conta como original para pular o login por senhas em suas prÃ³ximas entradas.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="fastlogin reload recarregar licenÃ§as adm">
+                    <td class="command-name">/fastlogin reload</td>
+                    <td>Recarrega os mÃ³dulos de checagem e bases de dados de contas originais e piratas.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="plugin-section" data-plugin="griefprevention">
+        <div class="plugin-title">ðŸ›¡ï¸ GriefPrevention (ProteÃ§Ã£o de Terrenos contra LadrÃµes)</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Comando</th>
+                    <th>DescriÃ§Ã£o</th>
+                    <th>PermissÃ£o de Uso</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="command-row" data-role="default" data-search="claim proteger terreno bloco area pa ouro">
+                    <td class="command-name">/claim</td>
+                    <td>Protege a Ã¡rea ao seu redor de forma quadrada usando os blocos de claim da sua conta.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="default" data-search="abandonclaim deletar remover terreno apagar blocos">
+                    <td class="command-name">/abandonclaim</td>
+                    <td>Exclui permanentemente a proteÃ§Ã£o do claim atual e restitui todos os blocos gastos.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="default" data-search="abandonallclaims apagar todos terrenos remover tudo">
+                    <td class="command-name">/abandonallclaims</td>
+                    <td>Apaga sumariamente todas as demarcaÃ§Ãµes de terrenos que vocÃª possui no servidor.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="default" data-search="trust permissao amigo construir quebrar terreno">
+                    <td class="command-name">/trust [Player]</td>
+                    <td>Concede permissÃ£o total para um amigo construir, minerar e abrir baÃºs no seu terreno.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="default" data-search="untrust remover amigo tirar acesso terreno">
+                    <td class="command-name">/untrust [Player]</td>
+                    <td>Revoga todo o tipo de permissÃ£o de um jogador dentro das suas terras protegidas.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="default" data-search="containertrust baus bixos fornalhas trancar amigo">
+                    <td class="command-name">/containertrust [Player]</td>
+                    <td>DÃ¡ acesso apenas para o amigo abrir seus baÃºs, fornalhas e usar animais. Ele nÃ£o pode quebrar blocos.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="default" data-search="accesstrust portas botoes alavancas alavancas amigo">
+                    <td class="command-name">/accesstrust [Player]</td>
+                    <td>DÃ¡ acesso unicamente para abrir portas, portÃµes e ativar botÃµes ou alavancas.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="default" data-search="permissiontrust gerenciar permissao amigo administrador">
+                    <td class="command-name">/permissiontrust [Player]</td>
+                    <td>Eleva o seu amigo ao status de gerente do terreno. Ele pode conceder trust para outras pessoas.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="default" data-search="claimslist lista meus terrenos tamanho blocos">
+                    <td class="command-name">/claimslist</td>
+                    <td>Lista todos os seus terrenos protegidos, coordenadas exatas e blocos de claim restantes.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="adjustbonusclaimblocks dar blocks claim jogador admin">
+                    <td class="command-name">/adjustbonusclaimblocks [Player] [Qtd]</td>
+                    <td>Adiciona blocos extras de proteÃ§Ã£o permanentes na carteira de um jogador.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="deleteclaim remover apagar terreno qualquer admin">
+                    <td class="command-name">/deleteclaim</td>
+                    <td>Deleta de forma forÃ§ada a proteÃ§Ã£o de qualquer terreno em que vocÃª estiver posicionado.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="plugin-section" data-plugin="griefpreventionshop">
+        <div class="plugin-title">ðŸ›’ GriefPreventionShop (Mercado de Blocos de Terreno)</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Comando</th>
+                    <th>DescriÃ§Ã£o</th>
+                    <th>PermissÃ£o de Uso</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="command-row" data-role="default" data-search="claimshop loja comprar blocos dinheiro gpshop">
+                    <td class="command-name">/claimshop</td>
+                    <td>Abre o menu GUI visual para comprar blocos adicionais de proteÃ§Ã£o usando moedas do jogo.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="default" data-search="claimhistory historico compras blocks terrenos gpshop">
+                    <td class="command-name">/claimhistory</td>
+                    <td>Abre um menu com o histÃ³rico completo de transaÃ§Ãµes e compras de blocos feitas na conta.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="gpshop reload recarregar preÃ§os shop admin">
+                    <td class="command-name">/gpshop reload</td>
+                    <td>Recarrega os preÃ§os por bloco, limites e configuraÃ§Ãµes de sons da loja visual.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="plugin-section" data-plugin="gsit">
+        <div class="plugin-title">ðŸª‘ GSit (AnimaÃ§Ãµes CosmÃ©ticas de Corpo)</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Comando</th>
+                    <th>DescriÃ§Ã£o</th>
+                    <th>PermissÃ£o de Uso</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="command-row" data-role="default" data-search="sit sentar chao escadas cadeiras">
+                    <td class="command-name">/sit</td>
+                    <td>Faz o seu personagem sentar imediatamente no bloco em que ele estiver pisando.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="default" data-search="lay deitar cama chao dormir cosmÃ©tico">
+                    <td class="command-name">/lay</td>
+                    <td>Faz o modelo do seu personagem deitar no chÃ£o simulaÃ§Ã£o de sono/morte.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="default" data-search="spin rodar quebrar dancar girar">
+                    <td class="command-name">/spin</td>
+                    <td>Faz o seu personagem iniciar uma animaÃ§Ã£o contÃ­nua girando no prÃ³prio eixo.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="default" data-search="crawl engatinhar buracos blocos andar">
+                    <td class="command-name">/crawl</td>
+                    <td>ForÃ§a o seu personagem a engatinhar no chÃ£o, permitindo entrar em frestas de 1 bloco de altura.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="default" data-search="belly deitar barriga chao rastejar">
+                    <td class="command-name">/belly</td>
+                    <td>Coloca o seu personagem de bruÃ§os com a barriga encostada totalmente no solo.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="gsit reload recarregar animacoes sentar adm">
+                    <td class="command-name">/gsit reload</td>
+                    <td>Recarrega as permissÃµes de blocos em que Ã© permitido sentar automaticamente.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="plugin-section" data-plugin="imageframe">
+        <div class="plugin-title">ðŸ–¼ï¸ ImageFrame (Imagens Reais em Molduras)</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Comando</th>
+                    <th>DescriÃ§Ã£o</th>
+                    <th>PermissÃ£o de Uso</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="command-row" data-role="adm" data-search="imageframe create criar imagem foto mapa url adm">
+                    <td class="command-name">/imageframe create [Nome] [URL_Da_Imagem] [Largura] [Altura]</td>
+                    <td>Transforma um link de internet em uma imagem real dentro de molduras do Minecraft.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="imageframe delete apagar tirar foto mapa adm">
+                    <td class="command-name">/imageframe delete [Nome]</td>
+                    <td>Remove e apaga as entidades de mapas atrelados a uma imagem especÃ­fica.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="imageframe list lista imagens fotos mapas adm">
+                    <td class="command-name">/imageframe list</td>
+                    <td>Lista todas as fotos e cartazes criados por arquivos de imagens do servidor.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="imageframe reload recarregar pastas fotos adm">
+                    <td class="command-name">/imageframe reload</td>
+                    <td>Recarrega os arquivos de imagem em cache na pasta do plugin.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="plugin-section" data-plugin="luckperms">
+        <div class="plugin-title">ðŸ‘‘ LuckPerms (Cargos e PermissÃµes de Sistema)</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Comando</th>
+                    <th>DescriÃ§Ã£o</th>
+                    <th>PermissÃ£o de Uso</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="command-row" data-role="adm" data-search="lp editor link pagina web cargos permissoes adm">
+                    <td class="command-name">/lp editor</td>
+                    <td>Gera uma URL de acesso segura para configurar os cargos e permissÃµes no navegador.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="lp user setar cargo dar grupo VIP adm">
+                    <td class="command-name">/lp user [Nome] parent set [Cargo]</td>
+                    <td>Seta e altera diretamente o cargo principal (Jogador, VIP, ADM) de um usuÃ¡rio.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="lp group verificar permissoes grupos adm">
+                    <td class="command-name">/lp group [Grupo] permission info</td>
+                    <td>Exibe a listagem de linhas de permissÃµes ativas de um grupo em formato texto.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="lp verbose debugar comandos erros logs adm">
+                    <td class="command-name">/lp verbose [on/off]</td>
+                    <td>Ativa o monitoramento em tempo real no console de quais permissÃµes estÃ£o sendo solicitadas.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="plugin-section" data-plugin="skinsrestorer">
+        <div class="plugin-title">ðŸŽ­ SkinsRestorer (Gerenciador de Roupas e Skins)</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Comando</th>
+                    <th>DescriÃ§Ã£o</th>
+                    <th>PermissÃ£o de Uso</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="command-row" data-role="default" data-search="skin mudar roupinha aparencia nome">
+                    <td class="command-name">/skin [NomeDoJogadorOriginal]</td>
+                    <td>Altera a skin atual do seu personagem para a skin do nick original informado.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="default" data-search="skin update atualizar roupinha bugada">
+                    <td class="command-name">/skin update</td>
+                    <td>ForÃ§a a atualizaÃ§Ã£o imediata da sua skin caso ela tenha bugado ou mudado de conta.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="default" data-search="skin clear limpar tirar voltar padrao">
+                    <td class="command-name">/skin clear</td>
+                    <td>Remove a skin customizada aplicada e volta com a aparÃªncia padrÃ£o da conta.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="default" data-search="skin search procurar achar roupas galeria">
+                    <td class="command-name">/skin search [Nome]</td>
+                    <td>Busca skins cadastradas em bancos de dados pÃºblicos na internet.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="skinsrestorer admin limpar forÃ§ar recarregar adm">
+                    <td class="command-name">/sr [reload/drop]</td>
+                    <td>Comandos administrativos para gerenciar cache e recarregar o motor do SkinsRestorer.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="plugin-section" data-plugin="slimefun">
+        <div class="plugin-title">ðŸ§ª Slimefun (Tecnologia, Motores e Magia AvanÃ§ada)</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Comando</th>
+                    <th>DescriÃ§Ã£o</th>
+                    <th>PermissÃ£o de Uso</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="command-row" data-role="default" data-search="sf guide livro guia receitas itens maquinas">
+                    <td class="command-name">/sf guide</td>
+                    <td>Abre o guia interativo do Slimefun contendo todas as receitas, forjas e reatores.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="default" data-search="sf stats status niveis pesquisas total">
+                    <td class="command-name">/sf stats</td>
+                    <td>Exibe dados estatÃ­sticos pessoais relativos ao montante de pesquisas e receitas descobertas.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="sf cheat pegar itens forÃ§ar liberar pesquisas adm">
+                    <td class="command-name">/sf cheat</td>
+                    <td>Abre the menu criativo do Slimefun para resgatar qualquer item tecnolÃ³gico instantaneamente.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="sf reload recarregar blocos energia adm">
+                    <td class="command-name">/sf reload</td>
+                    <td>Recarrega todas as tabelas de itens, traduÃ§Ãµes (pt_BR) e redes de energia.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="plugin-section" data-plugin="spark">
+        <div class="plugin-title">âš¡ spark (DiagnÃ³stico de Consumo e Lag)</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Comando</th>
+                    <th>DescriÃ§Ã£o</th>
+                    <th>PermissÃ£o de Uso</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="command-row" data-role="default" data-search="spark tps desempenho ticks saude">
+                    <td class="command-name">/spark tps</td>
+                    <td>Informa as mÃ©tricas de TPS e as porcentagens de estabilidade de processamento do mundo.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="default" data-search="spark health memoria ram hardware processador">
+                    <td class="command-name">/spark health</td>
+                    <td>Exibe o relatÃ³rio de uso de memÃ³ria RAM, CPU e armazenamento do hardware do servidor.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="spark profiler iniciar rastreio lag ram adm">
+                    <td class="command-name">/spark profiler [start/stop]</td>
+                    <td>Rastreia e cria um link web com a anÃ¡lise minuciosa de qual plugin ou bloco estÃ¡ causando lag.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="plugin-section" data-plugin="squaremap">
+        <div class="plugin-title">ðŸ—ºï¸ squaremap (Mapa Online por Navegador)</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Comando</th>
+                    <th>DescriÃ§Ã£o</th>
+                    <th>PermissÃ£o de Uso</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="command-row" data-role="default" data-search="squaremap hide esconder sumir mapa navegador">
+                    <td class="command-name">/squaremap hide</td>
+                    <td>Oculta a posiÃ§Ã£o do seu personagem do mapa visÃ­vel pelo navegador da web.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="default" data-search="squaremap show aparecer mostrar mapa navegador">
+                    <td class="command-name">/squaremap show</td>
+                    <td>Torna a localizaÃ§Ã£o em tempo real do seu personagem visÃ­vel novamente no mapa da web.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="squaremap fullrender renderizar mapa inteiro blocos adm">
+                    <td class="command-name">/squaremap fullrender</td>
+                    <td>ForÃ§a a renderizaÃ§Ã£o completa e atualizaÃ§Ã£o visual de todas as construÃ§Ãµes no mapa web.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="squaremap cancel parar renderizaÃ§Ã£o mapa adm">
+                    <td class="command-name">/squaremap cancel</td>
+                    <td>Cancela imediatamente a tarefa de renderizaÃ§Ã£o de imagens do mapa em execuÃ§Ã£o.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="plugin-section" data-plugin="timber">
+        <div class="plugin-title">ðŸª“ Timber (Derrubar Ãrvores de uma vez)</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Comando</th>
+                    <th>DescriÃ§Ã£o</th>
+                    <th>PermissÃ£o de Uso</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="command-row" data-role="default" data-search="timber passivo quebrar arvore inteira machado">
+                    <td class="command-name">Efeito Passivo</td>
+                    <td>Ao quebrar o bloco da base de uma Ã¡rvore usando qualquer machado, toda a madeira cai de uma vez sÃ³.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="default" data-search="timber toggle ativar desativar machado rapido">
+                    <td class="command-name">/timber toggle</td>
+                    <td>Alterna e desliga ou liga o efeito de corte rÃ¡pido automÃ¡tico de Ã¡rvores na sua conta.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="plugin-section" data-plugin="viaversion">
+        <div class="plugin-title">ðŸ”„ ViaVersion (Compatibilidade de VersÃµes)</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Comando</th>
+                    <th>DescriÃ§Ã£o</th>
+                    <th>PermissÃ£o de Uso</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="command-row" data-role="adm" data-search="viaversion list lista versoes minecraft clientes adm">
+                    <td class="command-name">/viaversion list</td>
+                    <td>Exibe uma lista detalhada mostrando quais versÃµes do Minecraft seus jogadores estÃ£o usando para entrar.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="viaversion pps pacotes conexao ping adm">
+                    <td class="command-name">/viaversion pps</td>
+                    <td>Exibe a taxa de pacotes por segundo enviados por conexÃµes de clientes especÃ­ficos.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="viaversion dump gerar relatorio erros conexao adm">
+                    <td class="command-name">/viaversion dump</td>
+                    <td>Gera um arquivo de log tÃ©cnico contendo dados de rede e conexÃµes para depuraÃ§Ã£o.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="plugin-section" data-plugin="worldguard">
+        <div class="plugin-title">ðŸ§± WorldGuard (Zonas e Cidades Protegidas da STAFF)</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Comando</th>
+                    <th>DescriÃ§Ã£o</th>
+                    <th>PermissÃ£o de Uso</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="command-row" data-role="default" data-search="rg info regiao bandeiras spawn flags">
+                    <td class="command-name">/rg info</td>
+                    <td>Mostra dados detalhados e bandeiras aplicadas na regiÃ£o/zona em que vocÃª estÃ¡ de pÃ©.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="rg define criar regiao spawn cidade protecao adm">
+                    <td class="command-name">/rg define [Nome]</td>
+                    <td>Salva a Ã¡rea selecionada no WorldEdit como uma zona protegida oficial administrada.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="rg flag bandeira pvp desativar monstros adm">
+                    <td class="command-name">/rg flag [Nome] [Bandeira] [allow/deny]</td>
+                    <td>Seta regras absolutas na zona (Ex: pvp deny impede lutas no spawn; mob-spawning deny).</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="rg remove apagar deletar regiao zona adm">
+                    <td class="command-name">/rg remove [Nome]</td>
+                    <td>Deleta permanentemente as demarcaÃ§Ãµes e travas de proteÃ§Ã£o de uma regiÃ£o da STAFF.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+                <tr class="command-row" data-role="adm" data-search="wg reload recarregar regioes flags adm">
+                    <td class="command-name">/wg reload</td>
+                    <td>Recarrega o motor principal, banco de dados e arquivos de zonas globais do WorldGuard.</td>
+                    <td><span class="badge badge-adm">STAFF</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="plugin-section" data-plugin="zeroinventoryproblems">
+        <div class="plugin-title">ðŸŽ’ ZeroInventoryProblems (Mochilas de InventÃ¡rio ExpansÃ­vel)</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Comando</th>
+                    <th>DescriÃ§Ã£o</th>
+                    <th>PermissÃ£o de Uso</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="command-row" data-role="default" data-search="backpack mochila craft pequena couro small">
+                    <td class="command-name">Mochila Pequena (Small)</td>
+                    <td>PermissÃ£o passiva liberando a fabricaÃ§Ã£o da mochila de 1 fileira de slots na bancada.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="default" data-search="backpack mochila craft media ferro medium">
+                    <td class="command-name">Mochila MÃ©dia (Medium)</td>
+                    <td>PermissÃ£o passiva liberando a fabricaÃ§Ã£o da mochila intermediÃ¡ria de 3 fileiras.</td>
+                    <td><span class="badge badge-default">Jogador</span></td>
+                </tr>
+                <tr class="command-row" data-role="vip" data-search="backpack mochila craft grande diamante vip big">
+                    <td class="command-name">Mochila Grande (Big)</td>
+                    <td>PermissÃ£o exclusiva de manufatura da mochila mÃ¡xima contendo 6 fileiras de espaÃ§o completo.</td>
+                    <td><span class="badge badge-vip">VIP</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="noResults" class="no-results">âŒ Nenhum comando, plugin ou cargo correspondente foi encontrado para a sua pesquisa.</div>
+</div>
+
+<footer>by: <span>@olucascomk</span></footer>
+
+<script>
+    const searchInput = document.getElementById('searchInput');
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const sections = document.querySelectorAll('.plugin-section');
+    const noResults = document.getElementById('noResults');
+    let currentRoleFilter = 'all';
+
+    function applyFilters() {
+        const query = searchInput.value.toLowerCase().trim();
+        let anyVisible = false;
+
+        sections.forEach(section => {
+            const pluginName = section.getAttribute('data-plugin');
+            const pluginTitle = section.querySelector('.plugin-title').textContent.toLowerCase();
+            let sectionHasMatch = false;
+
+            const pluginMatchesDirectly = pluginName.includes(query) || pluginTitle.includes(query);
+            const sectionRows = section.querySelectorAll('.command-row');
+
+            sectionRows.forEach(row => {
+                const rowRole = row.getAttribute('data-role');
+                const commandText = row.querySelector('.command-name').textContent.toLowerCase();
+                const descriptionText = row.cells[1].textContent.toLowerCase();
+                const roleText = row.cells[2].textContent.toLowerCase();
+                const customSearchTags = row.getAttribute('data-search').toLowerCase();
+
+                const matchesQuery = pluginMatchesDirectly || 
+                                     commandText.includes(query) || 
+                                     descriptionText.includes(query) || 
+                                     roleText.includes(query) || 
+                                     customSearchTags.includes(query);
+
+                const matchesRole = (currentRoleFilter === 'all') || (rowRole === currentRoleFilter);
+
+                if (matchesQuery && matchesRole) {
+                    row.style.display = '';
+                    sectionHasMatch = true;
+                    anyVisible = true;
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+
+            if (sectionHasMatch) {
+                section.style.display = '';
+            } else {
+                section.style.display = 'none';
+            }
+        });
+
+        if (anyVisible || (query === '' && currentRoleFilter === 'all')) {
+            noResults.style.display = 'none';
+        } else {
+            noResults.style.display = 'block';
+        }
+    }
+
+    searchInput.addEventListener('input', applyFilters);
+
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+            currentRoleFilter = this.getAttribute('data-filter');
+            applyFilters();
+        });
+    });
+</script>
+
+</body>
+</html>
